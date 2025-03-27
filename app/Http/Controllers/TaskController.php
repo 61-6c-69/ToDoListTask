@@ -32,8 +32,18 @@ class TaskController extends Controller
 		], Response::HTTP_OK);
 	}
 	
-	public function Update(){
-		return;
+	public function Update(Request $request): JsonResponse{
+		$update = auth()
+			->user()
+			->tasks()
+			->where('id', $request->id)
+			->update(
+				$request->only('title', 'description', 'due_date', 'priority')
+			);
+		
+		return response()->json([
+			'status' => 'success'
+		], Response::HTTP_OK);
 	}
 	
 	public function Delete(){
