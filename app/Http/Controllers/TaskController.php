@@ -38,7 +38,7 @@ class TaskController extends Controller
 			->tasks()
 			->where('id', $request->id)
 			->update(
-				$request->only('title', 'description', 'due_date', 'priority')
+				$request->only('title', 'description', 'status', 'due_date', 'priority')
 			);
 		
 		return response()->json([
