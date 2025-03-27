@@ -13,9 +13,10 @@ class TaskController extends Controller
 {
     //
 	public function Store(TaskRequest $request): JsonResponse{
-		$task = auth()->user()->tasks()->create($request->all());
+		$task = auth()->user()->tasks()->create($request->validated());
 		
 		return response()->json([
+			'status' => 'success',
 			'task' => $task
 		], Response::HTTP_CREATED);
 	}
@@ -24,7 +25,7 @@ class TaskController extends Controller
 		$tasks = auth()->user()->tasks();
 		
 		if($request->id){
-			$tasks->where('id', $request->id);
+			$tasks->find($request->id);
 		}
 		
 		return response()->json([
@@ -32,21 +33,23 @@ class TaskController extends Controller
 		], Response::HTTP_OK);
 	}
 	
-	public function Update(Request $request): JsonResponse{
-		$update = auth()
-			->user()
-			->tasks()
-			->where('id', $request->id)
-			->update(
-				$request->only('title', 'description', 'status', 'due_date', 'priority')
-			);
+	public function Update(TaskRequest $request): JsonResponse{
+		$update = auth()->user()->tasks()->find($request->id);
+		
+		if(!$task){
+			return response()->json([
+				'status' => 'error'
+			], Response::HTTP_NOT_FOUND);
+		}
+    
+		$task->update($request->validated());
 		
 		return response()->json([
 			'status' => 'success'
 		], Response::HTTP_OK);
 	}
 	
-	public function Delete(Request $request){
+	public function Delete(Request $request): JsonResponse{
 		$delete = auth()->user()->tasks()->find($request->id);
 		
 		if(!$delete){
