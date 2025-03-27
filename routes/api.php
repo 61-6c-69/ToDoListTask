@@ -20,9 +20,11 @@ Route::prefix('v1')->group(function(){
 	});
 	
 	Route::prefix('user')->middleware('auth:sanctum')->group(function(){
-		Route::get('/{id?}', [TaskController::class, 'Show']);
-		Route::post('/', [TaskController::class, 'Store']);
-		Route::put('/{id}', [TaskController::class, 'Update']);
-		Route::delete('/{id}', [TaskController::class, 'Delete']);
+		Route::prefix('task')->group(function(){
+			Route::get('/{id?}', [TaskController::class, 'Show']);
+			Route::post('/', [TaskController::class, 'Store']);
+			Route::put('/{id}', [TaskController::class, 'Update']);
+			Route::delete('/{id}', [TaskController::class, 'Delete']);
+		});
 	});
 });
