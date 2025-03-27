@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
 use App\Models\Tasks;
 use App\Http\Requests\TaskRequest;
+use App\Http\Resources\TaskResource;
 
 class TaskController extends Controller
 {
@@ -19,8 +20,16 @@ class TaskController extends Controller
 		], Response::HTTP_CREATED);
 	}
 	
-	public function Show(){
-		return;
+	public function Show(Request $request): JsonResponse{
+		$tasks = auth()->user()->tasks();
+		
+		if($request->id){
+			$tasks->where('id', $request->id);
+		}
+		
+		return response()->json([
+			'tasks' => TaskResource::collection($tasks->latest()->get())
+		], Response::HTTP_OK);
 	}
 	
 	public function Update(){
