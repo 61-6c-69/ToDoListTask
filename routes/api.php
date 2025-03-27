@@ -21,8 +21,8 @@ Route::prefix('v1')->group(function(){
 	
 	Route::prefix('user')->middleware('auth:sanctum')->group(function(){
 		Route::get('/{id?}', [TaskController::class, 'Show']);
-		Route::post('create', [TaskController::class, 'Store']);
-		Route::put('update/{id}', [TaskController::class, 'Update']);
-		Route::delete('delete', [TaskController::class, 'Delete']);
+		Route::post('/', [TaskController::class, 'Store']);
+		Route::put('/{id}', [TaskController::class, 'Update']);
+		Route::delete('/{id}', [TaskController::class, 'Delete']);
 	});
 });
