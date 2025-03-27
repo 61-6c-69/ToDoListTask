@@ -46,7 +46,19 @@ class TaskController extends Controller
 		], Response::HTTP_OK);
 	}
 	
-	public function Delete(){
-		return;
+	public function Delete(Request $request){
+		$delete = auth()->user()->tasks()->find($request->id);
+		
+		if(!$delete){
+			return response()->json([
+				'status' => 'error'
+			], Response::HTTP_NOT_FOUND);
+		}
+		
+		$delete->delete();
+		
+		return response()->json([
+			'status' => 'success'
+		], Response::HTTP_OK);
 	}
 }
