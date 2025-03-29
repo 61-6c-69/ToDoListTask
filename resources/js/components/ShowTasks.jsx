@@ -65,6 +65,7 @@ export default function ShowTsks(){
 										<td>{itm.due_date_str}</td>
 										<td>
 											<TaskDropDown task={itm.id} update={update_task_handler} remove={remove_task_handler}/>
+											<Link to={`/dash/edit/${itm.id}`} className='btn btn-dark btn-sm ms-5'>Edit</Link>
 										</td>
 									</tr>
 								)
