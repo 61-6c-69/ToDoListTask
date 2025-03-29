@@ -36,13 +36,13 @@ class TaskController extends Controller
 	public function Update(TaskRequest $request): JsonResponse{
 		$update = auth()->user()->tasks()->find($request->id);
 		
-		if(!$task){
+		if(!$update){
 			return response()->json([
 				'status' => 'error'
 			], Response::HTTP_NOT_FOUND);
 		}
     
-		$task->update($request->validated());
+		$update->update($request->validated());
 		
 		return response()->json([
 			'status' => 'success'
