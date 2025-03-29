@@ -10,6 +10,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router'
 //pages
 import Home from "./pages/Home"
 import Dashboard from "./pages/Dashboard"
+import Create from "./pages/Create"
 
 function RouterConfig(){
 	//login token
@@ -27,6 +28,9 @@ function RouterConfig(){
 		},{
 			path: '/dash',
 			element: <Dashboard/>
+		},{
+			path: '/dash/create',
+			element: <Create/>
 		}
 	])
 	

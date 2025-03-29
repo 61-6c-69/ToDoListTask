@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import {Link} from 'react-router'
 
 import TaskDropDown from './TaskDropDown'
 
@@ -72,7 +73,11 @@ export default function ShowTsks(){
 					</tbody>
 				</table>
 				{ tasks.length <= 0 &&
-					<p className='p-5 text-center '>Loading...</p>
+					<div className='text-center p-5'>
+						<Link to='/dash/create' className='btn btn-primary btn-md'>
+							Create New Task
+						</Link>
+					</div>
 				}
 			</div>
 		</>

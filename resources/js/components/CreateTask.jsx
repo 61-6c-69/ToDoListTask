@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import axios from 'axios'
+import {useNavigate} from 'react-router'
 
 export default function CreateTask(){
 	const [title, setTitle] = useState('')
@@ -8,6 +9,7 @@ export default function CreateTask(){
 	const [ddate, setDDate] = useState('')
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState('')
+	const navigate = useNavigate()
 	
 	const create_handler = async()=> {
 		if(title === '' || des === '' || ddate === '' || priority === ''){
@@ -23,6 +25,7 @@ export default function CreateTask(){
 			due_date: ddate
 		}).then((response)=>{
 			setError('Success')
+			navigate('/dash', { replace: true })
 		}).catch((error)=>{
 			setError(error.response.data.message)
 			console.log(error)

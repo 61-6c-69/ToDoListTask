@@ -1,10 +1,10 @@
 import DashboardLayout from './../layouts/DashboardLayout'
-import ShowTasks from './../components/ShowTasks'
-export default function Dashboard(){
+import CreateTask from './../components/CreateTask'
+export default function Create(){
 	return(
 		<div>
 			<DashboardLayout>
-				<ShowTasks/>
+				<CreateTask/>
 			</DashboardLayout>
 		</div>
 	)
