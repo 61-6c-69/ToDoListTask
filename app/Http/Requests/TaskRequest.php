@@ -23,7 +23,7 @@ class TaskRequest extends FormRequest
     {
         return [
             //
-			'title' => 'required|string|max:255',
+			'title' => (request()->isMethod('put') ? 'string|max:255' : 'required|string|max:255'),
 			'description' => 'nullable|string|max:1000',
 			'status' => 'in:pending,progress,completed',
 			'due_date' => 'date',
