@@ -8,12 +8,17 @@ use Illuminate\Http\JsonResponse;
 use App\Models\Tasks;
 use App\Http\Requests\TaskRequest;
 use App\Http\Resources\TaskResource;
+use App\Jobs\DueDateTaskCompleted;
 
 class TaskController extends Controller
 {
     //
 	public function Store(TaskRequest $request): JsonResponse{
 		$task = auth()->user()->tasks()->create($request->validated());
+		
+		DueDateTaskCompleted::dispatch($task)->delay(
+			\Carbon\Carbon::parse($task->due_date)
+		);
 		
 		return response()->json([
 			'status' => 'success',
