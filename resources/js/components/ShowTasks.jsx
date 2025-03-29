@@ -37,7 +37,7 @@ export default function ShowTsks(){
 	}, [])
 	return(
 		<>
-			<div className="overflow-x-auto">
+			<div className="overflow-x-auto h-full">
 				<table className="table">
 					<thead>
 						<tr className='bg-base-200'>
