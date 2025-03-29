@@ -20,7 +20,9 @@ class TaskResource extends JsonResource
 			'description' => $this->description,
 			'due_date' => $this->due_date,
 			'priority' => $this->priority,
+			'status' => $this->status,
 			'created_at' => $this->created_at,
+			'due_date_str' => (!empty($this->due_date) ? \Carbon\Carbon::parse($this->due_date)->ago() : '-')
 		];
     }
 }
