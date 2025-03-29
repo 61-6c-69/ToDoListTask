@@ -53,7 +53,7 @@ export default function ShowTsks(){
 						{
 							tasks.map((itm, key) => {
 								return(
-									<tr>
+									<tr className={itm.status === 'completed' ? 'opacity-50' : ''}>
 										<td>{key + 1}</td>
 										<td>
 											{itm.title}<br/>
