@@ -21,6 +21,7 @@ export default function Login(){
 		}).then((response)=>{
 			localStorage.setItem('token', response.data.token)
 			localStorage.setItem('user', JSON.stringify(response.data.user))
+			axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
 			navigate('/dash', { replace: true })
 		}).catch((error) =>{
 			setError(error.response.data.message)
